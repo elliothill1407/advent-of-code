@@ -22,7 +22,7 @@ class Solution:
             digits = {
                 'one': '1', 'two': '2', 'three': '3', 'four': '4', 'five': '5', 'six': '6', 'seven': '7', 'eight': '8', 'nine': '9'
             }
-
+            
             new_lines = []
             for line in lines:
                 new_line = ""
@@ -51,25 +51,21 @@ class Solution:
             
             return new_lines
         
-        file = open('input.txt', 'r')
-        lines = file.readlines()
+        with open('input.txt', 'r') as file:
+            lines = file.readlines()
         
         new_lines = getCleanLines(lines)
         
-        count = 0
-        sum = 0
+        total_sum = 0
         for line in new_lines:
-            count += 1
-
-            pair = line[0] + line[-1]
-            sum += int(pair)
+            if len(line) >= 2:
+                # combine the first and last digit to form a two-digit number
+                pair = line[0] + line[-1]
+                total_sum += int(pair)
         
-        print("Sum: {}".format(sum))
-        return sum
+        print("Sum: {}".format(total_sum))
+        return total_sum
 
 solution = Solution()
-# sum1 = solution.calibrationValuePartOne()
 sum2 = solution.calibrationValuePartTwo()
-
-# print("Sum1 = {}".format(sum1))
 print("Sum2 = {}".format(sum2))
